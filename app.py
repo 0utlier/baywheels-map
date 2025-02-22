@@ -82,7 +82,7 @@ st.markdown(
         /* Make the map container responsive */
         .leaflet-container {
             height: 100% !important;
-            width: 100% !important;
+            width: 50% !important;
         }
 
         /* Remove scroll and force map to fill screen */
@@ -90,7 +90,7 @@ st.markdown(
             margin: 0;
             padding: 0;
             height: 100%;
-            width: 100%;
+            width: 50%;
             overflow: hidden;
         }
 
