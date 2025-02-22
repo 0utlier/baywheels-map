@@ -43,7 +43,15 @@ def get_ebike_only_stations(user_coords):
 def create_map(user_coords):
     """Generate a Folium map with e-bike-only station markers."""
     stations = get_ebike_only_stations(user_coords)
-    m = folium.Map(location=user_coords, zoom_start=13)
+    m = folium.Map(location=user_coords, zoom_start=14)
+    
+    folium.Circle(
+        location=user_coords,
+        radius=1609,  # 1 mile radius
+        color='blue',
+        fill=True,
+        fill_opacity=0.1
+    ).add_to(m)
     
     for station in stations:
         folium.Marker(
