@@ -52,41 +52,20 @@ def create_map(user_coords):
             icon=folium.Icon(color='blue', icon='bicycle', prefix='fa')
         ).add_to(m)
     
+    locate_control = folium.plugins.LocateControl(auto_start=False)
+    m.add_child(locate_control)
+    
     return m
-
-def get_user_location():
-    """Attempt to get the user's current location using browser-based geolocation."""
-    import streamlit.components.v1 as components
-    components.html(
-        """
-        <script>
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                const latitude = position.coords.latitude;
-                const longitude = position.coords.longitude;
-                document.getElementById("geo-data").value = latitude + "," + longitude;
-                document.getElementById("geo-form").submit();
-            }
-        );
-        </script>
-        <form id="geo-form" action="" method="get">
-            <input type="hidden" id="geo-data" name="geo" />
-        </form>
-        """,
-        height=0
-    )
 
 # Streamlit app setup
 st.title("Bay Wheels E-Bike Availability Map")
 st.write("Showing stations with only e-bikes available near your location.")
 
-# Fetch user's location
-user_location = st.query_params.get("geo", [None])[0]
+# Default coordinates (San Francisco)
+user_coords = (37.7749, -122.4194)
 
-if user_location:
-    user_lat, user_lon = map(float, user_location.split(","))
-    user_coords = (user_lat, user_lon)
-    folium_map = create_map(user_coords)
-    folium_static(folium_map)
-else:
-    st.button("Find My Location", on_click=get_user_location)
+# Display map
+folium_map = create_map(user_coords)
+folium_static(folium_map)
+
+st.write("Use the button on the map to find your current location.")
