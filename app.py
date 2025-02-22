@@ -5,12 +5,82 @@ from geopy.distance import geodesic
 from streamlit_folium import folium_static
 import folium.plugins
 
+# Set the page layout to wide (for desktop)
+st.set_page_config(layout="wide")
+
+# Add custom CSS to ensure the page is responsive and eliminates horizontal scrolling
+st.markdown(
+    """
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .leaflet-container {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .css-1aumxhk {
+            width: 100% !important;
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+        }
+
+        @media (max-width: 768px) {
+            .css-1aumxhk {
+                width: 100% !important;
+                padding: 0 !important;
+            }
+
+            .streamlit-expanderHeader {
+                display: none;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# Add JavaScript to get browser width and adjust map width dynamically
+st.markdown(
+    """
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let width = window.innerWidth;
+
+            // Set the width of the map dynamically
+            let mapDiv = document.querySelector('.leaflet-container');
+            if (mapDiv) {
+                mapDiv.style.width = width + 'px';  // Set width to browser width
+            }
+
+            // Optionally, adjust the map height based on the width for proportional resizing
+            let mapHeight = width * 0.6; // 60% of width
+            if (mapDiv) {
+                mapDiv.style.height = mapHeight + 'px'; // Adjust height based on width
+            }
+        });
+    </script>
+    """,
+    unsafe_allow_html=True
+)
+
 # Define Bay Wheels GBFS endpoints
 STATION_INFO_URL = "https://gbfs.baywheels.com/gbfs/en/station_information.json"
 STATION_STATUS_URL = "https://gbfs.baywheels.com/gbfs/en/station_status.json"
-
-# Set the page layout to wide
-st.set_page_config(layout="wide")
 
 def fetch_data(url):
     """Fetch JSON data from the given URL."""
@@ -56,7 +126,6 @@ def create_map(user_coords):
             icon=folium.Icon(color='blue', icon='bicycle', prefix='fa')
         ).add_to(m)
     
-    # Add LocateControl plugin to the map
     locate_control = folium.plugins.LocateControl(auto_start=True, flyTo=True, keepCurrentZoomLevel=True)
     m.add_child(locate_control)
     
@@ -66,84 +135,11 @@ def create_map(user_coords):
 st.title("Bay Wheels E-Bike Availability Map")
 st.write("Showing stations with only e-bikes available near your location.")
 
-# Add custom CSS for mobile responsiveness and Pull-to-Refresh
-st.markdown(
-    """
-    <style>
-        /* Custom styling for mobile responsiveness */
-        .css-1aumxhk {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* Make the map container responsive */
-        .leaflet-container {
-            height: 100% !important;
-            width: 100% !important;
-        }
-
-        /* Remove scroll and force map to fill screen */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        /* Ensure map container has no scroll and fits in the viewport */
-        .streamlit-expanderHeader {
-            display: none;
-        }
-
-        /* Adjust title and content for mobile */
-        @media screen and (max-width: 768px) {
-            .css-1aumxhk {
-                padding: 0 !important;
-            }
-
-            .css-1aumxhk h1 {
-                font-size: 24px;
-            }
-
-            .css-1aumxhk p {
-                font-size: 16px;
-            }
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-# JavaScript for Pull-to-Refresh (Mobile)
-st.markdown(
-    """
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            let startY;
-            window.addEventListener('touchstart', function(event) {
-                startY = event.touches[0].clientY;
-            });
-            window.addEventListener('touchend', function(event) {
-                let endY = event.changedTouches[0].clientY;
-                if (startY - endY > 100) {
-                    location.reload(); // Reload the page on pull down
-                }
-            });
-        });
-    </script>
-    """,
-    unsafe_allow_html=True
-)
-
 # Default coordinates (San Francisco)
 user_coords = (37.7749, -122.4194)
 
 # Display map
 folium_map = create_map(user_coords)
-folium_static(folium_map, width=70, height=400)
+folium_static(folium_map)
 
 st.write("Use the button on the map to find your current location.")
