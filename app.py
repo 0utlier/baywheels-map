@@ -3,6 +3,7 @@ import folium
 import streamlit as st
 from geopy.distance import geodesic
 from streamlit_folium import folium_static
+import folium.plugins
 
 # Define Bay Wheels GBFS endpoints
 STATION_INFO_URL = "https://gbfs.baywheels.com/gbfs/en/station_information.json"
@@ -51,6 +52,10 @@ def create_map(user_coords):
             popup=f"{station['name']} ({station['num_ebikes']} e-bikes)",
             icon=folium.Icon(color='blue', icon='bicycle', prefix='fa')
         ).add_to(m)
+    
+    # Add LocateControl plugin to the map
+    locate_control = folium.plugins.LocateControl(auto_start=True, flyTo=True, keepCurrentZoomLevel=True)
+    m.add_child(locate_control)
     
     return m
 
