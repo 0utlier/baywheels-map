@@ -9,6 +9,9 @@ import folium.plugins
 STATION_INFO_URL = "https://gbfs.baywheels.com/gbfs/en/station_information.json"
 STATION_STATUS_URL = "https://gbfs.baywheels.com/gbfs/en/station_status.json"
 
+# Set the page layout to wide
+st.set_page_config(layout="wide")
+
 def fetch_data(url):
     """Fetch JSON data from the given URL."""
     response = requests.get(url)
