@@ -63,7 +63,7 @@ def create_map(user_coords):
 st.title("Bay Wheels E-Bike Availability Map")
 st.write("Showing stations with only e-bikes available near your location.")
 
-# Add custom CSS for mobile responsiveness
+# Add custom CSS for mobile responsiveness and Pull-to-Refresh
 st.markdown(
     """
     <style>
@@ -98,6 +98,41 @@ st.markdown(
             }
         }
     </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# JavaScript for Pull-to-Refresh (Mobile)
+st.markdown(
+    """
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let startY;
+            window.addEventListener('touchstart', function(event) {
+                startY = event.touches[0].clientY;
+            });
+            window.addEventListener('touchend', function(event) {
+                let endY = event.changedTouches[0].clientY;
+                if (startY - endY > 100) {
+                    location.reload(); // Reload the page on pull down
+                }
+            });
+            
+            function adjustMapHeight() {
+                let mapDiv = document.querySelector('iframe');
+                if (mapDiv) {
+                    if (window.innerWidth <= 768) {
+                        mapDiv.style.height = '400px';
+                    } else {
+                        mapDiv.style.height = '600px';
+                    }
+                }
+            }
+            
+            window.addEventListener('resize', adjustMapHeight);
+            adjustMapHeight();
+        });
+    </script>
     """,
     unsafe_allow_html=True
 )
