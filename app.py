@@ -43,7 +43,7 @@ def get_ebike_only_stations(user_coords):
 def create_map(user_coords):
     """Generate a Folium map with e-bike-only station markers."""
     stations = get_ebike_only_stations(user_coords)
-    m = folium.Map(location=user_coords, zoom_start=14)
+    m = folium.Map(location=user_coords, zoom_start=15, control_scale=True)
     
     for station in stations:
         folium.Marker(
@@ -52,7 +52,7 @@ def create_map(user_coords):
             icon=folium.Icon(color='blue', icon='bicycle', prefix='fa')
         ).add_to(m)
     
-    locate_control = folium.plugins.LocateControl(auto_start=True, flyTo=False)  # Prevent zooming in
+    locate_control = folium.plugins.LocateControl(auto_start=True, flyTo=False, keepCurrentZoomLevel=True)
     m.add_child(locate_control)
     
     return m
@@ -61,13 +61,18 @@ def create_map(user_coords):
 st.title("Bay Wheels E-Bike Availability Map")
 st.write("Showing stations with only e-bikes available near your location.")
 
-# JavaScript for pull-to-refresh
+# JavaScript for pull-to-refresh (Mobile)
 st.markdown(
     """
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            window.addEventListener('touchmove', function(event) {
-                if (window.scrollY === 0) {
+            let startY;
+            window.addEventListener('touchstart', function(event) {
+                startY = event.touches[0].clientY;
+            });
+            window.addEventListener('touchend', function(event) {
+                let endY = event.changedTouches[0].clientY;
+                if (startY - endY > 100) {
                     location.reload();
                 }
             });
