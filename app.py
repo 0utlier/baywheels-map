@@ -52,7 +52,7 @@ def create_map(user_coords):
             icon=folium.Icon(color='blue', icon='bicycle', prefix='fa')
         ).add_to(m)
     
-    locate_control = folium.plugins.LocateControl(auto_start=True, flyTo=False, keepCurrentZoomLevel=True)
+    locate_control = folium.plugins.LocateControl(auto_start=True, flyTo=True, keepCurrentZoomLevel=True)
     m.add_child(locate_control)
     
     return m
@@ -61,7 +61,7 @@ def create_map(user_coords):
 st.title("Bay Wheels E-Bike Availability Map")
 st.write("Showing stations with only e-bikes available near your location.")
 
-# JavaScript for pull-to-refresh (Mobile)
+# JavaScript for pull-to-refresh (Mobile) and dynamic map resizing
 st.markdown(
     """
     <script>
@@ -76,6 +76,20 @@ st.markdown(
                     location.reload();
                 }
             });
+            
+            function adjustMapHeight() {
+                let mapDiv = document.querySelector('iframe');
+                if (mapDiv) {
+                    if (window.innerWidth <= 768) {
+                        mapDiv.style.height = '400px';
+                    } else {
+                        mapDiv.style.height = '600px';
+                    }
+                }
+            }
+            
+            window.addEventListener('resize', adjustMapHeight);
+            adjustMapHeight();
         });
     </script>
     """,
