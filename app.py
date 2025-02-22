@@ -73,22 +73,35 @@ st.markdown(
             justify-content: center;
             align-items: center;
             height: 100vh;
+            overflow: hidden;
         }
 
         /* Make the map container responsive */
         .leaflet-container {
             height: 100% !important;
+            width: 100% !important;
         }
 
-        /* Reduce the padding for small screens */
-        @media screen and (max-width: 768px) {
-            .css-1aumxhk {
-                padding: 0 !important;
-            }
+        /* Remove scroll and force map to fill screen */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        /* Ensure map container has no scroll and fits in the viewport */
+        .streamlit-expanderHeader {
+            display: none;
         }
 
         /* Adjust title and content for mobile */
         @media screen and (max-width: 768px) {
+            .css-1aumxhk {
+                padding: 0 !important;
+            }
+
             .css-1aumxhk h1 {
                 font-size: 24px;
             }
@@ -117,20 +130,6 @@ st.markdown(
                     location.reload(); // Reload the page on pull down
                 }
             });
-            
-            function adjustMapHeight() {
-                let mapDiv = document.querySelector('iframe');
-                if (mapDiv) {
-                    if (window.innerWidth <= 768) {
-                        mapDiv.style.height = '400px';
-                    } else {
-                        mapDiv.style.height = '600px';
-                    }
-                }
-            }
-            
-            window.addEventListener('resize', adjustMapHeight);
-            adjustMapHeight();
         });
     </script>
     """,
