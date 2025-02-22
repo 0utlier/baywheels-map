@@ -32,4 +32,76 @@ def get_ebike_only_stations(user_coords):
                 eligible_stations.append({
                     "name": station["name"],
                     "lat": station["lat"],
-                    "lon": stati
+                    "lon": station["lon"],
+                    "num_ebikes": num_ebikes,
+                    "distance": distance
+                })
+    
+    eligible_stations.sort(key=lambda x: x["distance"])
+    return eligible_stations[:20]
+
+def create_map(user_coords):
+    """Generate a Folium map with e-bike-only station markers."""
+    stations = get_ebike_only_stations(user_coords)
+    m = folium.Map(location=user_coords, zoom_start=15, control_scale=True)
+    
+    for station in stations:
+        folium.Marker(
+            location=(station["lat"], station["lon"]),
+            popup=f"{station['name']} ({station['num_ebikes']} e-bikes)",
+            icon=folium.Icon(color='blue', icon='bicycle', prefix='fa')
+        ).add_to(m)
+    
+    return m
+
+# Streamlit app setup
+st.title("Bay Wheels E-Bike Availability Map")
+st.write("Showing stations with only e-bikes available near your location.")
+
+# Add custom CSS for mobile responsiveness
+st.markdown(
+    """
+    <style>
+        /* Custom styling for mobile responsiveness */
+        .css-1aumxhk {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Make the map container responsive */
+        .leaflet-container {
+            height: 100% !important;
+        }
+
+        /* Reduce the padding for small screens */
+        @media screen and (max-width: 768px) {
+            .css-1aumxhk {
+                padding: 0 !important;
+            }
+        }
+
+        /* Adjust title and content for mobile */
+        @media screen and (max-width: 768px) {
+            .css-1aumxhk h1 {
+                font-size: 24px;
+            }
+
+            .css-1aumxhk p {
+                font-size: 16px;
+            }
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# Default coordinates (San Francisco)
+user_coords = (37.7749, -122.4194)
+
+# Display map
+folium_map = create_map(user_coords)
+folium_static(folium_map, width=700, height=400)
+
+st.write("Use the button on the map to find your current location.")
