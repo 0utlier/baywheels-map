@@ -81,7 +81,7 @@ st.title("Bay Wheels E-Bike Availability Map")
 st.write("Showing stations with only e-bikes available near your location.")
 
 # Fetch user's location
-user_location = st.experimental_get_query_params().get("geo", [None])[0]
+user_location = st.query_params.get("geo", [None])[0]
 
 if user_location:
     user_lat, user_lon = map(float, user_location.split(","))
