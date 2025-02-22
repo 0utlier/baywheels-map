@@ -45,14 +45,6 @@ def create_map(user_coords):
     stations = get_ebike_only_stations(user_coords)
     m = folium.Map(location=user_coords, zoom_start=14)
     
-    folium.Circle(
-        location=user_coords,
-        radius=1609,  # 1 mile radius
-        color='blue',
-        fill=True,
-        fill_opacity=0.1
-    ).add_to(m)
-    
     for station in stations:
         folium.Marker(
             location=(station["lat"], station["lon"]),
@@ -60,7 +52,7 @@ def create_map(user_coords):
             icon=folium.Icon(color='blue', icon='bicycle', prefix='fa')
         ).add_to(m)
     
-    locate_control = folium.plugins.LocateControl(auto_start=False)
+    locate_control = folium.plugins.LocateControl(auto_start=True, flyTo=False)  # Prevent zooming in
     m.add_child(locate_control)
     
     return m
@@ -68,6 +60,22 @@ def create_map(user_coords):
 # Streamlit app setup
 st.title("Bay Wheels E-Bike Availability Map")
 st.write("Showing stations with only e-bikes available near your location.")
+
+# JavaScript for pull-to-refresh
+st.markdown(
+    """
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            window.addEventListener('touchmove', function(event) {
+                if (window.scrollY === 0) {
+                    location.reload();
+                }
+            });
+        });
+    </script>
+    """,
+    unsafe_allow_html=True
+)
 
 # Default coordinates (San Francisco)
 user_coords = (37.7749, -122.4194)
