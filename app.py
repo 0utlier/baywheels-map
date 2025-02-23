@@ -71,28 +71,11 @@ folium_map = create_map(user_coords)
 # Get HTML representation of the Folium map
 map_html = folium_map._repr_html_()
 
-# Use Streamlit's components to render the folium map with CSS Media Queries to adjust height dynamically
-components.html(f"""
-    <style>
-        /* Force the map container to have a fixed height */
-        .folium-map-container {{
-            width: 100%;
-            max-width: 100%;
-            height: 800px !important;  /* Use !important to override other styles */
-        }}
-
-        @media (max-width: 768px) {{
-            /* Adjust height for smaller screens */
-            .folium-map-container {{
-                width: 100%;
-                height: 400px !important;  /* Set a smaller height for mobile */
-            }}
-        }}
-    </style>
-    <div class="folium-map-container">
+# Set the iframe height and width directly
+st.components.v1.html(f"""
+    <div style="width: 100%; height: 800px;">
         {map_html}
     </div>
-""", height=800)  # Make sure this is still 800px
-
+""", height=800)
 
 st.write("Use the button on the map to find your current location.")
