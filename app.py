@@ -72,6 +72,18 @@ st.markdown(
             if (mapDiv) {
                 mapDiv.style.height = mapHeight + 'px'; // Adjust height based on width
             }
+
+            // Pass the width to Streamlit via the DOM
+            const widthElement = document.createElement("input");
+            widthElement.setAttribute("type", "hidden");
+            widthElement.setAttribute("id", "window-width");
+            widthElement.setAttribute("value", width);
+            document.body.appendChild(widthElement);
+
+            // Trigger Streamlit to access the width value by changing the URL
+            const url = new URL(window.location);
+            url.searchParams.set("window-width", width);
+            window.history.replaceState({}, "", url);
         });
     </script>
     """,
@@ -141,5 +153,9 @@ user_coords = (37.7749, -122.4194)
 # Display map
 folium_map = create_map(user_coords)
 folium_static(folium_map)
+
+# Retrieve the width from the query params and display it
+browser_width = st.experimental_get_query_params().get("window-width", ["Unknown"])[0]
+st.write(f"Your current browser width is: {browser_width}px")
 
 st.write("Use the button on the map to find your current location.")
