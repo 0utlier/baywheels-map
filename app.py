@@ -68,14 +68,15 @@ user_coords = (37.7749, -122.4194)
 # Generate map
 folium_map = create_map(user_coords)
 
-# Use Streamlit's components to render the folium map with custom HTML and CSS
-map_html = folium_map._repr_html_()  # Get HTML representation of the Folium map
+# Get HTML representation of the Folium map
+map_html = folium_map._repr_html_()
 
+# Use Streamlit's components to render the folium map with custom HTML and CSS
 components.html(f"""
     <style>
         .folium-map-container {{
             width: 100%;
-            height: 600px;
+            height: 600px;  /* Fix the height here */
         }}
     </style>
     <div class="folium-map-container">
