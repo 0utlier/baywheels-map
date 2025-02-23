@@ -64,7 +64,7 @@ st.markdown(
             // Set the width of the map dynamically to half the browser width
             let mapDiv = document.querySelector('.leaflet-container');
             if (mapDiv) {
-                mapDiv.style.width = (width / 4) + 'px';  // Set width to half of browser width
+                mapDiv.style.width = 70 + 'px';  // Set width to half of browser width
             }
 
             // Optionally, adjust the map height based on the width for proportional resizing
