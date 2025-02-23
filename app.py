@@ -76,7 +76,7 @@ components.html(f"""
     <style>
         .folium-map-container {{
             width: 100%;   /* Full width */
-            height: 60vh;  /* 60% of the viewport height */
+            height: 600px;  /* Fixed height of 600px */
         }}
     </style>
     <div class="folium-map-container">
