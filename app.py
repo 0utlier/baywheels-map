@@ -75,13 +75,13 @@ map_html = folium_map._repr_html_()
 components.html(f"""
     <style>
         .folium-map-container {{
-            width: 40px;
-            height: 1200px;  /* Fix the height here */
+            width: 100%;
+            height: 60vh;  /* Set height to 60% of the viewport height */
         }}
     </style>
     <div class="folium-map-container">
         {map_html}
     </div>
-""", height=1200)
+""", height=600)
 
 st.write("Use the button on the map to find your current location.")
