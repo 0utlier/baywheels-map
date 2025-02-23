@@ -68,8 +68,7 @@ user_coords = (37.7749, -122.4194)
 # Generate map
 folium_map = create_map(user_coords)
 
-# Get HTML representation of the Folium map
-map_html = folium_map._repr_html_()
+
 
 
 
