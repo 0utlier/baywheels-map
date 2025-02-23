@@ -68,12 +68,34 @@ user_coords = (37.7749, -122.4194)
 # Generate map
 folium_map = create_map(user_coords)
 
-# Use Streamlit's components to render the folium map with custom HTML and CSS
+# JavaScript to get the screen width and set it in the session_state
+components.html("""
+    <script type="text/javascript">
+    window.onload = function() {
+        const width = window.innerWidth;
+        const height = 600;  // Keep the height fixed as 600
+        const streamlitWidth = Math.min(width, 1200);  // Set max width to 1200px to prevent overly wide maps
+        const streamlitHeight = height;
+        const params = { width: streamlitWidth, height: streamlitHeight };
+
+        // Send data to Streamlit
+        window.parent.postMessage({isStreamlitMessage: true, data: params}, "*");
+    }
+    </script>
+""", height=0)  # We use this just to execute JS and get the screen size
+
+# Now use streamlit's session_state to access the width value passed via JS
+if "width" in st.session_state:
+    screen_width = st.session_state.width
+else:
+    screen_width = 800  # Fallback to 800 if the JS doesn't send data
+
+# Use Streamlit's components to render the folium map with custom HTML and dynamic width
 map_html = folium_map._repr_html_()  # Get HTML representation of the Folium map
 components.html(
     map_html,
-    width=400, #?
-    height=60  # Ensure this height works for your layout
+    height=600,
+    width=screen_width  # Dynamically adjust the width
 )
 
 st.write("Use the button on the map to find your current location.")
