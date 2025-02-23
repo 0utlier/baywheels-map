@@ -5,9 +5,6 @@ from geopy.distance import geodesic
 from streamlit_folium import folium_static
 import folium.plugins
 
-# Set the page layout to wide (for desktop)
-st.set_page_config(layout="wide")
-
 # Add custom CSS to ensure the page is responsive and eliminates horizontal scrolling
 st.markdown(
     """
@@ -155,7 +152,7 @@ folium_map = create_map(user_coords)
 folium_static(folium_map)
 
 # Retrieve the width from the query params and display it
-browser_width = st.experimental_get_query_params().get("window-width", ["Unknown"])[0]
+browser_width = st.query_params.get("window-width", ["Unknown"])[0]
 st.write(f"Your current browser width is: {browser_width}px")
 
 st.write("Use the button on the map to find your current location.")
