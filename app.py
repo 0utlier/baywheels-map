@@ -61,40 +61,8 @@ def create_map(user_coords):
 st.title("Bay Wheels E-Bike Availability Map")
 st.write("Showing stations with only e-bikes available near your location.")
 
-# JavaScript for pull-to-refresh (Mobile) and dynamic map resizing
-st.markdown(
-    """
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            let startY;
-            window.addEventListener('touchstart', function(event) {
-                startY = event.touches[0].clientY;
-            });
-            window.addEventListener('touchend', function(event) {
-                let endY = event.changedTouches[0].clientY;
-                if (startY - endY > 100) {
-                    location.reload();
-                }
-            });
-            
-            function adjustMapHeight() {
-                let mapDiv = document.querySelector('iframe');
-                if (mapDiv) {
-                    if (window.innerWidth <= 768) {
-                        mapDiv.style.height = '40px';
-                    } else {
-                        mapDiv.style.height = '60px';
-                    }
-                }
-            }
-            
-            window.addEventListener('resize', adjustMapHeight);
-            adjustMapHeight();
-        });
-    </script>
-    """,
-    unsafe_allow_html=True
-)
+
+
 
 # Default coordinates (San Francisco)
 user_coords = (37.7749, -122.4194)
