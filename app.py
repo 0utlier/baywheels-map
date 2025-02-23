@@ -69,7 +69,15 @@ user_coords = (37.7749, -122.4194)
 folium_map = create_map(user_coords)
 
 
+# Get HTML representation of the Folium map
+map_html = folium_map._repr_html_()
 
+# Set the iframe height and width directly
+st.components.v1.html(f"""
+    <div style="width: 100%; height: 800px;">
+        {map_html}
+    </div>
+""", height=800)
 
 
 st.write("Use the button on the map to find your current location.")
