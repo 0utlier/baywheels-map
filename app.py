@@ -3,6 +3,7 @@ import folium
 import streamlit as st
 from geopy.distance import geodesic
 from streamlit_folium import folium_static
+import streamlit.components.v1 as components
 
 # Define Bay Wheels GBFS endpoints
 STATION_INFO_URL = "https://gbfs.baywheels.com/gbfs/en/station_information.json"
@@ -64,23 +65,15 @@ st.write("Showing stations with only e-bikes available near your location.")
 # Default coordinates (San Francisco)
 user_coords = (37.7749, -122.4194)
 
-# Custom CSS to make sure map fits screen width and remove horizontal scroll
-st.markdown(
-    """
-    <style>
-    .leaflet-container {
-        width: 100% !important;
-        height: 80vh;
-        max-width: 100% !important;
-        margin: 0 auto;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-# Display map
+# Generate map
 folium_map = create_map(user_coords)
-folium_static(folium_map)
+
+# Use Streamlit's components to render the folium map with custom HTML and CSS to remove horizontal scroll
+map_html = folium_map._repr_html_()  # Get HTML representation of the Folium map
+components.html(
+    map_html,
+    height=600,
+    width="100%"  # Ensures the map takes up 100% of the width of its container, preventing horizontal scroll
+)
 
 st.write("Use the button on the map to find your current location.")
