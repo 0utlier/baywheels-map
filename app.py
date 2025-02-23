@@ -75,7 +75,7 @@ map_html = folium_map._repr_html_()
 components.html(f"""
     <style>
         .folium-map-container {{
-            width: 100%;
+            width: 40px;
             height: 1200px;  /* Fix the height here */
         }}
     </style>
