@@ -72,11 +72,9 @@ folium_map = create_map(user_coords)
 # Get HTML representation of the Folium map
 map_html = folium_map._repr_html_()
 
-# Set the iframe height and width directly
-st.components.v1.html(f"""
-    <div style="width: 100%; height: 800px;">
-        {map_html}
-    </div>
+# Embed the HTML file in an iframe
+components.html(f"""
+    <iframe src="{map_html_path}" width="100%" height="800px" frameborder="0"></iframe>
 """, height=800)
 
 
