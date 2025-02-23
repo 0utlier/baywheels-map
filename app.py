@@ -72,7 +72,7 @@ folium_map = create_map(user_coords)
 map_html = folium_map._repr_html_()  # Get HTML representation of the Folium map
 components.html(
     map_html,
-    width=40, #?
+    width=400, #?
     height=60  # Ensure this height works for your layout
 )
 
