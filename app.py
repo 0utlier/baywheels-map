@@ -85,10 +85,7 @@ components.html("""
 """, height=0)  # We use this just to execute JS and get the screen size
 
 # Now use streamlit's session_state to access the width value passed via JS
-if "width" in st.session_state:
-    screen_width = st.session_state.width
-else:
-    screen_width = 800  # Fallback to 800 if the JS doesn't send data
+screen_width = st.session_state.width
 
 # Use Streamlit's components to render the folium map with custom HTML and dynamic width
 map_html = folium_map._repr_html_()  # Get HTML representation of the Folium map
