@@ -90,6 +90,6 @@ components.html(f"""
         {map_html}
     </div>
 """, height=800)  # Update height here as well
-)
+
 
 st.write("Use the button on the map to find your current location.")
