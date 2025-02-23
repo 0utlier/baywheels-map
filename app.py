@@ -76,20 +76,14 @@ st.markdown(
                     location.reload();
                 }
             });
-
-                        // Set the width of the map dynamically to half the browser width
-            let mapDiv = document.querySelector('.leaflet-container');
-            if (mapDiv) {
-                mapDiv.style.width = 70 + 'px';  // Set width to half of browser width
-            }
-
+            
             let width = window.innerWidth;
             
             function adjustMapHeight() {
                 let mapDiv = document.querySelector('iframe');
                 if (mapDiv) {
                     if (window.innerWidth <= 768) {
-                        mapDiv.style.height = '400px';
+                        mapDiv.style.height = '200px';
                     } else {
                         mapDiv.style.height = (width) * 0.3 + 'px'; // Adjust height based on width
                     }
