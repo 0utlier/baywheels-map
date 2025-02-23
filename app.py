@@ -58,11 +58,25 @@ def create_map(user_coords):
     return m
 
 # Streamlit app setup
-st.title("Bay Wheels E-Bike Availability Map")
+st.markdown(
+    """
+    <style>
+    .reload-title {
+        font-size: 36px;
+        cursor: pointer;
+        color: #1e90ff;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+st.markdown(
+    '<a href="#" class="reload-title" onclick="window.location.reload();">Bay Wheels E-Bike Availability Map</a>',
+    unsafe_allow_html=True
+)
+
 st.write("Showing stations with only e-bikes available near your location.")
-
-
-
 
 # Default coordinates (San Francisco)
 user_coords = (37.7749, -122.4194)
