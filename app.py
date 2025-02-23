@@ -31,7 +31,7 @@ st.markdown(
             overflow-x: hidden !important;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 78px) {
             .css-1aumxhk {
                 width: 100% !important;
                 padding: 0 !important;
