@@ -76,12 +76,11 @@ components.html(f"""
     <style>
         .folium-map-container {{
             width: 100%;
-            height: 600px;  /* Fix the height here */
         }}
     </style>
     <div class="folium-map-container">
         {map_html}
     </div>
-""", height=600)
+""")
 
 st.write("Use the button on the map to find your current location.")
