@@ -74,7 +74,7 @@ map_html = folium_map._repr_html_()
 # Use Streamlit's components to render the folium map with fixed height and width
 components.html(
     f"""
-    <div style="width: 100%; height: 600px;">
+    <div style="width: 100%; height: 600px; display: flex; flex-direction: column;">
         {map_html}
     </div>
     """,
