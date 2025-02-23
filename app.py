@@ -71,14 +71,14 @@ folium_map = create_map(user_coords)
 # Get HTML representation of the Folium map
 map_html = folium_map._repr_html_()
 
-# Directly embed the map with inline style
+# Use Streamlit's components to render the folium map with fixed height and width
 components.html(
     f"""
     <div style="width: 100%; height: 600px;">
         {map_html}
     </div>
     """,
-    height=600  # Ensure this height works for your layout
+    height=600,  # Ensure this height works for your layout
 )
 
 st.write("Use the button on the map to find your current location.")
