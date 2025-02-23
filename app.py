@@ -3,7 +3,6 @@ import folium
 import streamlit as st
 from geopy.distance import geodesic
 from streamlit_folium import folium_static
-import streamlit.components.v1 as components
 
 # Define Bay Wheels GBFS endpoints
 STATION_INFO_URL = "https://gbfs.baywheels.com/gbfs/en/station_information.json"
@@ -62,32 +61,46 @@ def create_map(user_coords):
 st.title("Bay Wheels E-Bike Availability Map")
 st.write("Showing stations with only e-bikes available near your location.")
 
+# JavaScript for pull-to-refresh (Mobile) and dynamic map resizing
+st.markdown(
+    """
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let startY;
+            window.addEventListener('touchstart', function(event) {
+                startY = event.touches[0].clientY;
+            });
+            window.addEventListener('touchend', function(event) {
+                let endY = event.changedTouches[0].clientY;
+                if (startY - endY > 100) {
+                    location.reload();
+                }
+            });
+            
+            function adjustMapHeight() {
+                let mapDiv = document.querySelector('iframe');
+                if (mapDiv) {
+                    if (window.innerWidth <= 768) {
+                        mapDiv.style.height = '400px';
+                    } else {
+                        mapDiv.style.height = '600px';
+                    }
+                }
+            }
+            
+            window.addEventListener('resize', adjustMapHeight);
+            adjustMapHeight();
+        });
+    </script>
+    """,
+    unsafe_allow_html=True
+)
+
 # Default coordinates (San Francisco)
 user_coords = (37.7749, -122.4194)
 
-# Generate map
+# Display map
 folium_map = create_map(user_coords)
-
-# Use Streamlit's components to render the folium map with custom HTML and CSS
-map_html = folium_map._repr_html_()  # Get HTML representation of the Folium map
-
-components.html(f"""
-    <style>
-        .folium-map-container {{
-            width: 100%;
-            max-width: 100%;
-            height: 600px;
-        }}
-
-        @media (max-width: 768px) {{
-            .folium-map-container {{
-                width: 100%;
-            }}
-        }}
-    </style>
-    <div class="folium-map-container">
-        {map_html}
-    </div>
-""", height=600)
+folium_static(folium_map)
 
 st.write("Use the button on the map to find your current location.")
