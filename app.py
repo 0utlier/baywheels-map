@@ -82,6 +82,6 @@ components.html(f"""
     <div class="folium-map-container">
         {map_html}
     </div>
-""", height=600)
+""")
 
 st.write("Use the button on the map to find your current location.")
