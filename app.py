@@ -68,12 +68,12 @@ user_coords = (37.7749, -122.4194)
 # Generate map
 folium_map = create_map(user_coords)
 
-# Use Streamlit's components to render the folium map with custom HTML and CSS to remove horizontal scroll
+# Use Streamlit's components to render the folium map with custom HTML and CSS
 map_html = folium_map._repr_html_()  # Get HTML representation of the Folium map
 components.html(
     map_html,
-    height=600,
-    width="100%"  # Ensures the map takes up 100% of the width of its container, preventing horizontal scroll
+    Width=40 #?
+    height=60  # Ensure this height works for your layout
 )
 
 st.write("Use the button on the map to find your current location.")
