@@ -83,13 +83,14 @@ components.html(f"""
         @media (max-width: 768px) {{
             .folium-map-container {{
                 width: 100%;
+                height: 400px;  /* Adjust the height for smaller screens if needed */
             }}
         }}
     </style>
     <div class="folium-map-container">
         {map_html}
     </div>
-""", height=800)  # Update height here as well
+""", height=800)  # Make sure this matches the CSS height
 
 
 st.write("Use the button on the map to find your current location.")
