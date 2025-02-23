@@ -77,15 +77,13 @@ st.markdown(
                 }
             });
             
-            let width = window.innerWidth;
-            
             function adjustMapHeight() {
                 let mapDiv = document.querySelector('iframe');
                 if (mapDiv) {
                     if (window.innerWidth <= 768) {
-                        mapDiv.style.height = '200px';
+                        mapDiv.style.height = '40px';
                     } else {
-                        mapDiv.style.height = (width) * 0.3 + 'px'; // Adjust height based on width
+                        mapDiv.style.height = '60px';
                     }
                 }
             }
