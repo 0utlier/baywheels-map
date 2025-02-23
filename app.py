@@ -74,11 +74,11 @@ map_html = folium_map._repr_html_()
 # Use Streamlit's components to render the folium map with fixed height and width
 components.html(
     f"""
-    <div style="width: 100%; height: 600px; display: flex; flex-direction: column;">
+    <div style="width: 100%; height: 600px; overflow: hidden;">
         {map_html}
     </div>
     """,
-    height=600,  # Ensure this height works for your layout
+    height=600  # Set height directly to ensure it doesn't change
 )
 
 st.write("Use the button on the map to find your current location.")
