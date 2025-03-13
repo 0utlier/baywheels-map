@@ -105,18 +105,11 @@ st.markdown("""
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 """, unsafe_allow_html=True)
 
-# Display icons separately
-st.markdown("""
-    <i class="fa fa-apple"></i> iPhone &nbsp;
-    <i class="material-icons">android</i> Android
-""", unsafe_allow_html=True)
-
 # Add a button that opens the Bay Wheels app on Android
 st.markdown("""
     <a href="intent://#Intent;scheme=baywheels;package=com.motivateco.gobike;end" target="_blank">
         <button style="padding:10px 20px; background-color:#007BFF; color:white; border:none; border-radius:5px; cursor:pointer;">
-                <i class="material-icons">android</i> Android
-                Droid App
+                <i class="material-icons">android</i>
         </button>
     </a>
 """, unsafe_allow_html=True)
@@ -125,7 +118,7 @@ st.markdown("""
 st.markdown("""
     <a href="https://apps.apple.com/us/app/bay-wheels/id1233398899" target="_blank">
         <button style="padding:10px 20px; background-color:#28A745; color:white; border:none; border-radius:5px; cursor:pointer;">
-            iPhone App
+            <i class="fa fa-apple"></i> iPhone
         </button>
     </a>
 """, unsafe_allow_html=True)
