@@ -110,35 +110,24 @@ st.markdown("""
 col1, col2 = st.columns(2)
 
 with col1:
-# Add a button that opens the Bay Wheels app on Android
-st.markdown("""
-    <a href="intent://#Intent;scheme=baywheels;package=com.motivateco.gobike;end" target="_blank">
-        <button style="padding:10px 20px; background-color:#28A745; color:white; border:none; border-radius:5px; cursor:pointer;">
-                <i class="material-icons">android</i>
-        </button>
-    </a>
-""", unsafe_allow_html=True)
+    # Add a button that opens the Bay Wheels app on Android
+    st.markdown("""
+        <a href="intent://#Intent;scheme=baywheels;package=com.motivateco.gobike;end" target="_blank">
+            <button style="padding:10px 20px; background-color:#28A745; color:white; border:none; border-radius:5px; cursor:pointer;">
+                    <i class="material-icons">android</i>
+            </button>
+        </a>
+    """, unsafe_allow_html=True)
 
 with col2:
-# Add a button that opens the Bay Wheels app on iPhone
-st.markdown("""
-    <a href="https://apps.apple.com/us/app/bay-wheels/id1233398899" target="_blank">
-        <button style="padding:10px 20px; background-color:#007BFF; color:white; border:none; border-radius:5px; cursor:pointer;">
-            <i class="fab fa-app-store-ios"></i>
-        </button>
-    </a>
-""", unsafe_allow_html=True)
+    # Add a button that opens the Bay Wheels app on iPhone
+    st.markdown("""
+        <a href="https://apps.apple.com/us/app/bay-wheels/id1233398899" target="_blank">
+            <button style="padding:10px 20px; background-color:#007BFF; color:white; border:none; border-radius:5px; cursor:pointer;">
+                <i class="fab fa-app-store-ios"></i>
+            </button>
+        </a>
+    """, unsafe_allow_html=True)
 
 #==============================================
-
-# Create two columns
-col1, col2 = st.columns(2)
-
-with col1:
-    if st.button('<i class="fab fa-app-store-ios"></i> iPhone', unsafe_allow_html=True):
-        st.write("iPhone button clicked")
-
-with col2:
-    if st.button('<i class="material-icons">android</i> Android', unsafe_allow_html=True):
-        st.write("Android button clicked")
 
