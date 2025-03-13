@@ -1,8 +1,8 @@
-import requests
 import folium
-import streamlit as st
 import pandas as pd
 import pydeck as pdk
+import requests
+import streamlit as st
 
 from geopy.distance import geodesic
 from streamlit_folium import folium_static
@@ -62,7 +62,7 @@ def create_map(user_coords):
 
 # Streamlit app setup
 st.title("E-Bike Only Map")
-st.write("Showing stations with only e-bikes available.")
+#st.write("Showing stations with only e-bikes available.")
 
 # JavaScript for dynamic map resizing
 st.markdown(
