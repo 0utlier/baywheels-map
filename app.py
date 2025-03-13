@@ -9,14 +9,11 @@ from streamlit_folium import folium_static
 
 # ================BUTTONS for BW Mobile App==============================
 
-# Set page configuration
-# st.set_page_config(page_title="Bay Wheels Map", layout="wide")
-
 # Add a button that opens the Bay Wheels app on Android
 st.markdown("""
     <a href="intent://#Intent;scheme=baywheels;package=com.motivateco.gobike;end" target="_blank">
         <button style="padding:10px 20px; background-color:#007BFF; color:white; border:none; border-radius:5px; cursor:pointer;">
-            Droid
+            Droid App
         </button>
     </a>
 """, unsafe_allow_html=True)
@@ -25,7 +22,7 @@ st.markdown("""
 st.markdown("""
     <a href="https://apps.apple.com/us/app/bay-wheels/id1233398899" target="_blank">
         <button style="padding:10px 20px; background-color:#28A745; color:white; border:none; border-radius:5px; cursor:pointer;">
-            iPhone
+            iPhone App
         </button>
     </a>
 """, unsafe_allow_html=True)
@@ -86,25 +83,13 @@ def create_map(user_coords):
     return m
 
 # Streamlit app setup
-st.title("Bay Wheels E-Bike Availability Map")
-st.write("Showing stations with only e-bikes available near your location.")
+st.title("E-Bike Availability Map")
+st.write("Showing stations with only e-bikes available.")
 
 # JavaScript for pull-to-refresh (Mobile) and dynamic map resizing
 st.markdown(
     """
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            let startY;
-            window.addEventListener('touchstart', function(event) {
-                startY = event.touches[0].clientY;
-            });
-            window.addEventListener('touchend', function(event) {
-                let endY = event.changedTouches[0].clientY;
-                if (startY - endY > 100) {
-                    location.reload();
-                }
-            });
-            
             function adjustMapHeight() {
                 let mapDiv = document.querySelector('iframe');
                 if (mapDiv) {
