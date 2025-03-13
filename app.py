@@ -10,7 +10,7 @@ from streamlit_folium import folium_static
 # Define Bay Wheels GBFS endpoints
 STATION_INFO_URL = "https://gbfs.baywheels.com/gbfs/en/station_information.json"
 STATION_STATUS_URL = "https://gbfs.baywheels.com/gbfs/en/station_status.json"
-CLASSIC_BIKE_COUNT = 1
+CLASSIC_BIKE_COUNT = 0
 
 def fetch_data(url):
     """Fetch JSON data from the given URL."""
@@ -53,7 +53,7 @@ def create_map(user_coords, classic_count):
     
     for station in stations:
         classic_bikes_string = ""
-        if classic_count % 2 != 1:
+        if classic_count % 2 != 0:
             classic_bikes_string = " + 1 classic"
         folium.Marker(
             location=(station["lat"], station["lon"]),
