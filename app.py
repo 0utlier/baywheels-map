@@ -59,6 +59,26 @@ st.pydeck_chart(pdk.Deck(
     ],
 ))
 
+import streamlit as st
+import platform
+
+# Function to check the operating system
+def check_os():
+    os_name = platform.system()
+    if os_name == "Darwin":
+        return "macOS"
+    elif os_name == "Windows":
+        return "Windows"
+    elif os_name == "Linux":
+        return "Linux"
+    else:
+        return "Unknown"
+
+# Button to check OS
+if st.button("Check OS"):
+    os_name = check_os()
+    st.write(f"Detected OS: {os_name}")
+    st.toast(f"Button pressed! OS: {os_name}")  # Shows a pop-up when button is clicked
 
 # ==============================================
 
