@@ -6,6 +6,7 @@ from streamlit_folium import folium_static
 # ==============================================
 
 
+import streamlit as st
 import pandas as pd
 import pydeck as pdk
 
@@ -17,6 +18,15 @@ st.markdown("""
     <a href="intent://#Intent;scheme=baywheels;package=com.motivateco.gobike;end" target="_blank">
         <button style="padding:10px 20px; background-color:#007BFF; color:white; border:none; border-radius:5px; cursor:pointer;">
             Open Bay Wheels App (Android)
+        </button>
+    </a>
+""", unsafe_allow_html=True)
+
+# Add a button that opens the Bay Wheels app on iPhone
+st.markdown("""
+    <a href="https://apps.apple.com/us/app/bay-wheels/id1233398899" target="_blank">
+        <button style="padding:10px 20px; background-color:#28A745; color:white; border:none; border-radius:5px; cursor:pointer;">
+            Open Bay Wheels App (iPhone)
         </button>
     </a>
 """, unsafe_allow_html=True)
@@ -47,7 +57,6 @@ st.pydeck_chart(pdk.Deck(
         ),
     ],
 ))
-
 
 # ==============================================
 
