@@ -3,18 +3,18 @@ import folium
 import streamlit as st
 from geopy.distance import geodesic
 from streamlit_folium import folium_static
-import streamlit as st
+
 import pandas as pd
 import pydeck as pdk
 
 # Set page configuration
 st.set_page_config(page_title="Bay Wheels Map", layout="wide")
 
-# Add a button linking to the Bay Wheels Android app
+# Add a button that opens the Bay Wheels app on Android if installed
 st.markdown("""
-    <a href="https://play.google.com/store/apps/details?id=com.motivateco.chicago" target="_blank">
+    <a href="intent://#Intent;scheme=baywheels;package=com.motivateco.chicago;end" target="_blank">
         <button style="padding:10px 20px; background-color:#007BFF; color:white; border:none; border-radius:5px; cursor:pointer;">
-            Download Bay Wheels App (Android)
+            Open Bay Wheels App (Android)
         </button>
     </a>
 """, unsafe_allow_html=True)
@@ -45,6 +45,8 @@ st.pydeck_chart(pdk.Deck(
         ),
     ],
 ))
+
+# ==============================================
 
 # Define Bay Wheels GBFS endpoints
 STATION_INFO_URL = "https://gbfs.baywheels.com/gbfs/en/station_information.json"
