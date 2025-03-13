@@ -71,26 +71,15 @@ st.title("E-Bike Only Map")
 
 
     # Add a button to trigger the update
-button_pressed = st.button("Show Stations with 1 Classic Bike and e-Bikes")
+button_pressed = st.button(f"Show Stations with {CLASSIC_BIKE_COUNT} Classic Bike and e-Bikes")
 
 # Default coordinates (San Francisco)
 user_coords = (37.7749, -122.4194)
 if button_pressed:
     # Filter the stations based on the updated condition
-    # Display map
     CLASSIC_BIKE_COUNT += 1
-    folium_map = create_map(user_coords, CLASSIC_BIKE_COUNT)
-    #folium_static(folium_map)
-
-    #filtered_stations = [station for station in stations if station['num_ebikes'] > 0 and station['num_classic_bikes'] == 1]
-else:
-    # Default filter, or previous logic
     # Display map
-    classic_count = 100
-    #folium_map = create_map(user_coords, classic_count)
-    #folium_static(folium_map)
-
-    #filtered_stations = [station for station in stations if station['num_ebikes'] > 0 and station['num_classic_bikes'] == 0]
+    folium_map = create_map(user_coords, CLASSIC_BIKE_COUNT)
 
 
 
