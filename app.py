@@ -71,14 +71,19 @@ st.title("E-Bike Only Map")
 
 
     # Add a button to trigger the update
+
 button_pressed = st.button(f"Show Stations with 1 Classic Bike and e-Bikes")
+
+# Initialize session state to track button label
+if 'button_label' not in st.session_state:
+    st.session_state.button_label = "Show Stations with 1 Classic Bike and e-Bikes"
 
 # Default coordinates (San Francisco)
 user_coords = (37.7749, -122.4194)
 if button_pressed:
     # Filter the stations based on the updated condition
     CLASSIC_BIKE_COUNT += 1
-    button_pressed.session_state.button_label="Show Stations with ONLY FreE-Bikes"
+    st.session_state.button_label = "Show Stations with ONLY FreE-Bikes"
     # Display map
     folium_map = create_map(user_coords, CLASSIC_BIKE_COUNT)
 
