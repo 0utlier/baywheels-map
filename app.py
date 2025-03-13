@@ -6,6 +6,7 @@ from streamlit_folium import folium_static
 # ==============================================
 
 
+import streamlit as st
 import pandas as pd
 import pydeck as pdk
 
@@ -18,7 +19,7 @@ st.markdown("""
         function openBayWheelsApp() {
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
             if (/android/i.test(userAgent)) {
-                window.location.href = "intent://#Intent;scheme=baywheels;package=com.motivateco.gobike;end";
+                window.location.href = "intent://#Intent;package=com.motivateco.gobike;scheme=baywheels;S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.motivateco.gobike;end";
             } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
                 window.location.href = "https://apps.apple.com/us/app/bay-wheels/id1233398899";
             } else {
