@@ -7,28 +7,6 @@ import pydeck as pdk
 from geopy.distance import geodesic
 from streamlit_folium import folium_static
 
-# ================BUTTONS for BW Mobile App==============================
-
-# Add a button that opens the Bay Wheels app on Android
-st.markdown("""
-    <a href="intent://#Intent;scheme=baywheels;package=com.motivateco.gobike;end" target="_blank">
-        <button style="padding:10px 20px; background-color:#007BFF; color:white; border:none; border-radius:5px; cursor:pointer;">
-            Droid App
-        </button>
-    </a>
-""", unsafe_allow_html=True)
-
-# Add a button that opens the Bay Wheels app on iPhone
-st.markdown("""
-    <a href="https://apps.apple.com/us/app/bay-wheels/id1233398899" target="_blank">
-        <button style="padding:10px 20px; background-color:#28A745; color:white; border:none; border-radius:5px; cursor:pointer;">
-            iPhone App
-        </button>
-    </a>
-""", unsafe_allow_html=True)
-
-#==============================================
-
 # Define Bay Wheels GBFS endpoints
 STATION_INFO_URL = "https://gbfs.baywheels.com/gbfs/en/station_information.json"
 STATION_STATUS_URL = "https://gbfs.baywheels.com/gbfs/en/station_status.json"
@@ -83,10 +61,10 @@ def create_map(user_coords):
     return m
 
 # Streamlit app setup
-st.title("E-Bike Availability Map")
+st.title("E-Bike Only Map")
 st.write("Showing stations with only e-bikes available.")
 
-# JavaScript for pull-to-refresh (Mobile) and dynamic map resizing
+# JavaScript for dynamic map resizing
 st.markdown(
     """
     <script>
@@ -116,4 +94,27 @@ user_coords = (37.7749, -122.4194)
 folium_map = create_map(user_coords)
 folium_static(folium_map)
 
-st.write("Use the button on the map to find your current location.")
+# st.write("Use the button on the map to find your current location.")
+
+
+# ================BUTTONS for BW Mobile App==============================
+
+# Add a button that opens the Bay Wheels app on Android
+st.markdown("""
+    <a href="intent://#Intent;scheme=baywheels;package=com.motivateco.gobike;end" target="_blank">
+        <button style="padding:10px 20px; background-color:#007BFF; color:white; border:none; border-radius:5px; cursor:pointer;">
+            Droid App
+        </button>
+    </a>
+""", unsafe_allow_html=True)
+
+# Add a button that opens the Bay Wheels app on iPhone
+st.markdown("""
+    <a href="https://apps.apple.com/us/app/bay-wheels/id1233398899" target="_blank">
+        <button style="padding:10px 20px; background-color:#28A745; color:white; border:none; border-radius:5px; cursor:pointer;">
+            iPhone App
+        </button>
+    </a>
+""", unsafe_allow_html=True)
+
+#==============================================
