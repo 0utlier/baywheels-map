@@ -10,7 +10,7 @@ from streamlit_folium import folium_static
 # Define Bay Wheels GBFS endpoints
 STATION_INFO_URL = "https://gbfs.baywheels.com/gbfs/en/station_information.json"
 STATION_STATUS_URL = "https://gbfs.baywheels.com/gbfs/en/station_status.json"
-CLASSIC_BIKE_COUNT = 0
+CLASSIC_BIKE_COUNT = 1
 
 def fetch_data(url):
     """Fetch JSON data from the given URL."""
