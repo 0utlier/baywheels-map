@@ -118,3 +118,18 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 #==============================================
+
+import streamlit as st
+
+# Adding Font Awesome or Material Icons in the app
+st.markdown("""
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+""", unsafe_allow_html=True)
+
+# Use icons in buttons
+if st.button('<i class="fa fa-apple"></i> iPhone', unsafe_allow_html=True):
+    st.write("Apple button clicked")
+
+if st.button('<i class="material-icons">android</i> Android', unsafe_allow_html=True):
+    st.write("Android button clicked")
