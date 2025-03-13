@@ -31,33 +31,6 @@ st.markdown("""
     </a>
 """, unsafe_allow_html=True)
 
-# Load your data (example placeholder)
-data = pd.DataFrame({
-    'lat': [37.7749],
-    'lon': [-122.4194],
-    'station': ['Example Station'],
-    'bikes_available': [5]
-})
-
-# Display the map
-st.pydeck_chart(pdk.Deck(
-    initial_view_state=pdk.ViewState(
-        latitude=37.7749,
-        longitude=-122.4194,
-        zoom=12,
-        pitch=50,
-    ),
-    layers=[
-        pdk.Layer(
-            'ScatterplotLayer',
-            data=data,
-            get_position='[lon, lat]',
-            get_color='[200, 30, 0, 160]',
-            get_radius=100,
-        ),
-    ],
-))
-
 #==============================================
 
 # Define Bay Wheels GBFS endpoints
