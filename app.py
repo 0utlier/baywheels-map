@@ -1,23 +1,22 @@
 import requests
 import folium
 import streamlit as st
-from geopy.distance import geodesic
-from streamlit_folium import folium_static
-# ==============================================
-
-
-import streamlit as st
 import pandas as pd
 import pydeck as pdk
 
-# Set page configuration
-st.set_page_config(page_title="Bay Wheels Map", layout="wide")
+from geopy.distance import geodesic
+from streamlit_folium import folium_static
 
-# Add a button that opens the correct Bay Wheels app on Android if installed
+# ================BUTTONS for BW Mobile App==============================
+
+# Set page configuration
+# st.set_page_config(page_title="Bay Wheels Map", layout="wide")
+
+# Add a button that opens the Bay Wheels app on Android
 st.markdown("""
     <a href="intent://#Intent;scheme=baywheels;package=com.motivateco.gobike;end" target="_blank">
         <button style="padding:10px 20px; background-color:#007BFF; color:white; border:none; border-radius:5px; cursor:pointer;">
-            Open Bay Wheels App (Android)
+            Open Bay Wheels (Droid)
         </button>
     </a>
 """, unsafe_allow_html=True)
@@ -26,7 +25,7 @@ st.markdown("""
 st.markdown("""
     <a href="https://apps.apple.com/us/app/bay-wheels/id1233398899" target="_blank">
         <button style="padding:10px 20px; background-color:#28A745; color:white; border:none; border-radius:5px; cursor:pointer;">
-            Open Bay Wheels App (iPhone)
+            Open Bay Wheels (iPhone)
         </button>
     </a>
 """, unsafe_allow_html=True)
