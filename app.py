@@ -24,7 +24,7 @@ def get_ebike_only_stations(user_coords, classic_count):
     station_status = fetch_data(STATION_STATUS_URL)["data"]["stations"]
     status_dict = {s["station_id"]: s for s in station_status}
 
-    CLASSIC_BIKE_COUNT = CLASSIC_BIKE_COUNT % 2
+    classic_count = CLASSIC_BIKE_COUNT % 2
     
     eligible_stations = []
     for station in station_info:
