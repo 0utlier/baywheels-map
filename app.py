@@ -6,29 +6,29 @@ from streamlit_folium import folium_static
 # ==============================================
 
 
-import streamlit as st
 import pandas as pd
 import pydeck as pdk
 
 # Set page configuration
 st.set_page_config(page_title="Bay Wheels Map", layout="wide")
 
-# Add a button that opens the correct Bay Wheels app on Android if installed
+# Add a single button that detects the device OS and opens the appropriate Bay Wheels app
 st.markdown("""
-    <a href="intent://#Intent;scheme=baywheels;package=com.motivateco.gobike;end" target="_blank">
-        <button style="padding:10px 20px; background-color:#007BFF; color:white; border:none; border-radius:5px; cursor:pointer;">
-            Open Bay Wheels App (Android)
-        </button>
-    </a>
-""", unsafe_allow_html=True)
-
-# Add a button that opens the Bay Wheels app on iPhone
-st.markdown("""
-    <a href="https://apps.apple.com/us/app/bay-wheels/id1233398899" target="_blank">
-        <button style="padding:10px 20px; background-color:#28A745; color:white; border:none; border-radius:5px; cursor:pointer;">
-            Open Bay Wheels App (iPhone)
-        </button>
-    </a>
+    <script>
+        function openBayWheelsApp() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            if (/android/i.test(userAgent)) {
+                window.location.href = "intent://#Intent;scheme=baywheels;package=com.motivateco.gobike;end";
+            } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                window.location.href = "https://apps.apple.com/us/app/bay-wheels/id1233398899";
+            } else {
+                alert('Unsupported device. Please visit the app store manually.');
+            }
+        }
+    </script>
+    <button onclick="openBayWheelsApp()" style="padding:10px 20px; background-color:#6f42c1; color:white; border:none; border-radius:5px; cursor:pointer;">
+        Open Bay Wheels App
+    </button>
 """, unsafe_allow_html=True)
 
 # Load your data (example placeholder)
