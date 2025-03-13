@@ -84,7 +84,7 @@ else:
     # Default filter, or previous logic
     # Display map
     classic_count = 0
-    folium_map = create_map(user_coords)
+    folium_map = create_map(user_coords, classic_count)
     folium_static(folium_map)
 
     #filtered_stations = [station for station in stations if station['num_ebikes'] > 0 and station['num_classic_bikes'] == 0]
