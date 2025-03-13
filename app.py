@@ -43,17 +43,6 @@ def get_ebike_only_stations(user_coords):
     eligible_stations.sort(key=lambda x: x["distance"])
     return eligible_stations[:20]
 
-# Add a button to trigger the update
-button_pressed = st.button("Show Stations with 1 Classic Bike and e-Bikes")
-
-if button_pressed:
-    # Filter the stations based on the updated condition
-    filtered_stations = [station for station in stations if station['num_ebikes'] > 0 and station['num_classic_bikes'] == 1]
-else:
-    # Default filter, or previous logic
-    filtered_stations = [station for station in stations if station['num_ebikes'] > 0 and station['num_classic_bikes'] == 0]
-
-
 def create_map(user_coords):
     """Generate a Folium map with e-bike-only station markers."""
     stations = get_ebike_only_stations(user_coords)
@@ -70,6 +59,18 @@ def create_map(user_coords):
     m.add_child(locate_control)
     
     return m
+
+# Add a button to trigger the update
+button_pressed = st.button("Show Stations with 1 Classic Bike and e-Bikes")
+
+if button_pressed:
+    # Filter the stations based on the updated condition
+    filtered_stations = [station for station in stations if station['num_ebikes'] > 0 and station['num_classic_bikes'] == 1]
+else:
+    # Default filter, or previous logic
+    filtered_stations = [station for station in stations if station['num_ebikes'] > 0 and station['num_classic_bikes'] == 0]
+
+
 
 # Streamlit app setup
 st.title("E-Bike Only Map")
