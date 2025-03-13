@@ -115,7 +115,8 @@ st.markdown("""
 st.markdown("""
     <a href="intent://#Intent;scheme=baywheels;package=com.motivateco.gobike;end" target="_blank">
         <button style="padding:10px 20px; background-color:#007BFF; color:white; border:none; border-radius:5px; cursor:pointer;">
-            Droid App
+                <i class="material-icons">android</i> Android
+                Droid App
         </button>
     </a>
 """, unsafe_allow_html=True)
