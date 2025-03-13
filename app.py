@@ -106,21 +106,20 @@ st.markdown("""
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 """, unsafe_allow_html=True)
 
-# Create two columns
 col1, col2 = st.columns(2)
 
 with col1:
-    # Add a button that opens the Bay Wheels app on Android
+    # Android button
     st.markdown("""
         <a href="intent://#Intent;scheme=baywheels;package=com.motivateco.gobike;end" target="_blank">
             <button style="padding:10px 20px; background-color:#28A745; color:white; border:none; border-radius:5px; cursor:pointer;">
-                    <i class="material-icons">android</i>
+                <i class="material-icons">android</i>
             </button>
         </a>
     """, unsafe_allow_html=True)
 
 with col2:
-    # Add a button that opens the Bay Wheels app on iPhone
+    # iPhone button
     st.markdown("""
         <a href="https://apps.apple.com/us/app/bay-wheels/id1233398899" target="_blank">
             <button style="padding:10px 20px; background-color:#007BFF; color:white; border:none; border-radius:5px; cursor:pointer;">
