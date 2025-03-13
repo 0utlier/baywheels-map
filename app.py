@@ -111,12 +111,7 @@ st.markdown("""
 st.markdown("""
     <a href="baywheels://open" target="_blank">
         <button style="padding:10px 20px; background-color:#007BFF; color:white; border:none; border-radius:5px; cursor:pointer; display:inline-block;">
-            <i class="fab fa-app-store-ios"></i> Open Bay Wheels
-        </button>
-    </a>
-    <a href="https://apps.apple.com/us/app/bay-wheels/id1233398899" target="_blank">
-        <button style="padding:10px 20px; background-color:#007BFF; color:white; border:none; border-radius:5px; cursor:pointer; display:inline-block;">
-            <i class="fab fa-app-store-ios"></i> App Store
+            <i class="fab fa-app-store-ios"></i>
         </button>
     </a>
 """, unsafe_allow_html=True)
