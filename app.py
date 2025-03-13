@@ -17,7 +17,7 @@ def fetch_data(url):
     response.raise_for_status()
     return response.json()
 
-def get_ebike_only_stations(user_coords):
+def get_ebike_only_stations(user_coords, classic_count):
     """Fetch and filter stations that only have e-bikes available."""
     station_info = fetch_data(STATION_INFO_URL)["data"]["stations"]
     station_status = fetch_data(STATION_STATUS_URL)["data"]["stations"]
@@ -30,7 +30,7 @@ def get_ebike_only_stations(user_coords):
             num_ebikes = status_dict[station_id]["num_ebikes_available"]
             num_classic_bikes = status_dict[station_id]["num_bikes_available"] - num_ebikes
             
-            if num_ebikes > 0 and num_classic_bikes == 1:
+            if num_ebikes > 0 and num_classic_bikes == classic_count:
                 distance = geodesic(user_coords, (station["lat"], station["lon"])).miles
                 eligible_stations.append({
                     "name": station["name"],
@@ -43,9 +43,9 @@ def get_ebike_only_stations(user_coords):
     eligible_stations.sort(key=lambda x: x["distance"])
     return eligible_stations[:20]
 
-def create_map(user_coords):
+def create_map(user_coords=user_coords, classic_count=classic_count):
     """Generate a Folium map with e-bike-only station markers."""
-    stations = get_ebike_only_stations(user_coords)
+    stations = get_ebike_only_stations(user_coords=user_coords, classic_count=classic_count)
     m = folium.Map(location=user_coords, zoom_start=15, control_scale=True)
     
     for station in stations:
@@ -75,13 +75,15 @@ user_coords = (37.7749, -122.4194)
 if button_pressed:
     # Filter the stations based on the updated condition
     # Display map
-    folium_map = create_map(user_coords)
+    classic_count = 1
+    folium_map = create_map(user_coords, classic_count)
     folium_static(folium_map)
 
     #filtered_stations = [station for station in stations if station['num_ebikes'] > 0 and station['num_classic_bikes'] == 1]
 else:
     # Default filter, or previous logic
     # Display map
+    classic_count = 0
     folium_map = create_map(user_coords)
     folium_static(folium_map)
 
@@ -116,7 +118,8 @@ st.markdown(
 user_coords = (37.7749, -122.4194)
 
 # Display map
-folium_map = create_map(user_coords)
+classic_count = 0
+folium_map = create_map(user_coords, classic_count)
 folium_static(folium_map)
 
 # st.write("Use the button on the map to find your current location.")
