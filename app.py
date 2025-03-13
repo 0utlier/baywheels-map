@@ -13,23 +13,22 @@ import pydeck as pdk
 # Set page configuration
 st.set_page_config(page_title="Bay Wheels Map", layout="wide")
 
-# Add a single button that detects the device OS and opens the appropriate Bay Wheels app
+# Add a button that opens the correct Bay Wheels app on Android if installed
 st.markdown("""
-    <script>
-        function openBayWheelsApp() {
-            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            if (/android/i.test(userAgent)) {
-                window.location.href = "intent://#Intent;package=com.motivateco.gobike;scheme=baywheels;S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.motivateco.gobike;end";
-            } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                window.location.href = "https://apps.apple.com/us/app/bay-wheels/id1233398899";
-            } else {
-                alert('Device cannot be determined. Please visit the app store manually.');
-            }
-        }
-    </script>
-    <button onclick="openBayWheelsApp()" style="padding:10px 20px; background-color:#6f42c1; color:white; border:none; border-radius:5px; cursor:pointer;">
-        Open Bay Wheels App
-    </button>
+    <a href="intent://#Intent;scheme=baywheels;package=com.motivateco.gobike;end" target="_blank">
+        <button style="padding:10px 20px; background-color:#007BFF; color:white; border:none; border-radius:5px; cursor:pointer;">
+            Open Bay Wheels App (Android)
+        </button>
+    </a>
+""", unsafe_allow_html=True)
+
+# Add a button that opens the Bay Wheels app on iPhone
+st.markdown("""
+    <a href="https://apps.apple.com/us/app/bay-wheels/id1233398899" target="_blank">
+        <button style="padding:10px 20px; background-color:#28A745; color:white; border:none; border-radius:5px; cursor:pointer;">
+            Open Bay Wheels App (iPhone)
+        </button>
+    </a>
 """, unsafe_allow_html=True)
 
 # Load your data (example placeholder)
@@ -59,47 +58,7 @@ st.pydeck_chart(pdk.Deck(
     ],
 ))
 
-import streamlit as st
-import streamlit.components.v1 as components
-
-# Function to display a popup message using JavaScript
-def show_popup(message):
-    components.html(f"""
-    <script>
-        alert("{message}");
-    </script>
-    """, height=0)
-
-# Button to check mobile OS
-if st.button("Check Mobile OS"):
-    # Custom JavaScript to detect the mobile OS
-    components.html("""
-    <script>
-        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-        var os = "Unknown OS";
-        if (/android/i.test(userAgent)) {
-            os = "Android";
-        } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
-            os = "iOS";
-        }
-        // Send OS detection message to Python
-        parent.postMessage(os, "*");
-    </script>
-    """, height=0)
-
-    # Listen for the message from JavaScript
-    message = components.html("""
-    <script>
-        window.addEventListener("message", function(event) {
-            window.parent.postMessage(event.data, "*");
-        });
-    </script>
-    """, height=0)
-    
-    # Check and show the popup
-    show_popup(f"Button pressed! Mobile OS detected: {message}")
-
-# ==============================================
+#==============================================
 
 # Define Bay Wheels GBFS endpoints
 STATION_INFO_URL = "https://gbfs.baywheels.com/gbfs/en/station_information.json"
