@@ -132,16 +132,3 @@ st.markdown("""
 #==============================================
 
 
-# Display icons with buttons
-col1, col2 = st.columns(2)
-with col1:
-    if st.button('iPhone'):
-        st.write("Apple button clicked")
-            <a href="https://apps.apple.com/us/app/bay-wheels/id1233398899" target="_blank">
-
-
-with col2:
-    if st.button('Android'):
-        st.write("Android button clicked")
-
-
