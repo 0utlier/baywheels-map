@@ -63,10 +63,10 @@ def create_map(user_coords):
     
     if button_pressed:
         # Filter the stations based on the updated condition
-        filtered_stations = [station for station in stations if station['num_ebikes'] > 0 and station['num_classic_bikes'] == 1]
+        #filtered_stations = [station for station in stations if station['num_ebikes'] > 0 and station['num_classic_bikes'] == 1]
     else:
         # Default filter, or previous logic
-        filtered_stations = [station for station in stations if station['num_ebikes'] > 0 and station['num_classic_bikes'] == 0]
+        #filtered_stations = [station for station in stations if station['num_ebikes'] > 0 and station['num_classic_bikes'] == 0]
 
     
     return m
