@@ -23,7 +23,7 @@ st.markdown("""
             } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
                 window.location.href = "https://apps.apple.com/us/app/bay-wheels/id1233398899";
             } else {
-                alert('Unsupported device. Please visit the app store manually.');
+                alert('Device cannot be determined. Please visit the app store manually.');
             }
         }
     </script>
@@ -58,6 +58,7 @@ st.pydeck_chart(pdk.Deck(
         ),
     ],
 ))
+
 
 # ==============================================
 
