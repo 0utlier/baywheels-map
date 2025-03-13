@@ -10,6 +10,7 @@ from streamlit_folium import folium_static
 # Define Bay Wheels GBFS endpoints
 STATION_INFO_URL = "https://gbfs.baywheels.com/gbfs/en/station_information.json"
 STATION_STATUS_URL = "https://gbfs.baywheels.com/gbfs/en/station_status.json"
+CLASSIC_BIKE_COUNT = 0
 
 def fetch_data(url):
     """Fetch JSON data from the given URL."""
@@ -22,6 +23,8 @@ def get_ebike_only_stations(user_coords, classic_count):
     station_info = fetch_data(STATION_INFO_URL)["data"]["stations"]
     station_status = fetch_data(STATION_STATUS_URL)["data"]["stations"]
     status_dict = {s["station_id"]: s for s in station_status}
+
+    CLASSIC_BIKE_COUNT = CLASSIC_BIKE_COUNT % 2
     
     eligible_stations = []
     for station in station_info:
@@ -75,8 +78,8 @@ user_coords = (37.7749, -122.4194)
 if button_pressed:
     # Filter the stations based on the updated condition
     # Display map
-    classic_count = 1
-    folium_map = create_map(user_coords, classic_count)
+    CLASSIC_BIKE_COUNT += 1
+    folium_map = create_map(user_coords, CLASSIC_BIKE_COUNT)
     #folium_static(folium_map)
 
     #filtered_stations = [station for station in stations if station['num_ebikes'] > 0 and station['num_classic_bikes'] == 1]
@@ -118,8 +121,7 @@ st.markdown(
 user_coords = (37.7749, -122.4194)
 
 # Display map
-classic_count = 0
-folium_map = create_map(user_coords, classic_count)
+folium_map = create_map(user_coords, CLASSIC_BIKE_COUNT)
 folium_static(folium_map)
 
 # st.write("Use the button on the map to find your current location.")
