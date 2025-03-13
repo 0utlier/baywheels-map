@@ -78,6 +78,7 @@ user_coords = (37.7749, -122.4194)
 if button_pressed:
     # Filter the stations based on the updated condition
     CLASSIC_BIKE_COUNT += 1
+    button_pressed = st.button(f"Show Stations with {CLASSIC_BIKE_COUNT} Classic Bike and e-Bikes")
     # Display map
     folium_map = create_map(user_coords, CLASSIC_BIKE_COUNT)
 
