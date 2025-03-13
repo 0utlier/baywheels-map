@@ -60,25 +60,44 @@ st.pydeck_chart(pdk.Deck(
 ))
 
 import streamlit as st
-import platform
+import streamlit.components.v1 as components
 
-# Function to check the operating system
-def check_os():
-    os_name = platform.system()
-    if os_name == "Darwin":
-        return "macOS"
-    elif os_name == "Windows":
-        return "Windows"
-    elif os_name == "Linux":
-        return "Linux"
-    else:
-        return "Unknown"
+# Function to display a popup message using JavaScript
+def show_popup(message):
+    components.html(f"""
+    <script>
+        alert("{message}");
+    </script>
+    """, height=0)
 
-# Button to check OS
-if st.button("Check OS"):
-    os_name = check_os()
-    st.write(f"Detected OS: {os_name}")
-    st.toast(f"Button pressed! OS: {os_name}")  # Shows a pop-up when button is clicked
+# Button to check mobile OS
+if st.button("Check Mobile OS"):
+    # Custom JavaScript to detect the mobile OS
+    components.html("""
+    <script>
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        var os = "Unknown OS";
+        if (/android/i.test(userAgent)) {
+            os = "Android";
+        } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
+            os = "iOS";
+        }
+        // Send OS detection message to Python
+        parent.postMessage(os, "*");
+    </script>
+    """, height=0)
+
+    # Listen for the message from JavaScript
+    message = components.html("""
+    <script>
+        window.addEventListener("message", function(event) {
+            window.parent.postMessage(event.data, "*");
+        });
+    </script>
+    """, height=0)
+    
+    # Check and show the popup
+    show_popup(f"Button pressed! Mobile OS detected: {message}")
 
 # ==============================================
 
