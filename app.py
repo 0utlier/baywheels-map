@@ -99,6 +99,18 @@ folium_static(folium_map)
 
 # ================BUTTONS for BW Mobile App==============================
 
+# Add icon libraries using markdown
+st.markdown("""
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+""", unsafe_allow_html=True)
+
+# Display icons separately
+st.markdown("""
+    <i class="fa fa-apple"></i> iPhone &nbsp;
+    <i class="material-icons">android</i> Android
+""", unsafe_allow_html=True)
+
 # Add a button that opens the Bay Wheels app on Android
 st.markdown("""
     <a href="intent://#Intent;scheme=baywheels;package=com.motivateco.gobike;end" target="_blank">
@@ -119,27 +131,17 @@ st.markdown("""
 
 #==============================================
 
-import streamlit as st
-
-# Add icon libraries using markdown
-st.markdown("""
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-""", unsafe_allow_html=True)
 
 # Display icons with buttons
 col1, col2 = st.columns(2)
 with col1:
     if st.button('iPhone'):
         st.write("Apple button clicked")
+            <a href="https://apps.apple.com/us/app/bay-wheels/id1233398899" target="_blank">
+
 
 with col2:
     if st.button('Android'):
         st.write("Android button clicked")
 
-# Display icons separately
-st.markdown("""
-    <i class="fa fa-apple"></i> iPhone &nbsp;
-    <i class="material-icons">android</i> Android
-""", unsafe_allow_html=True)
 
