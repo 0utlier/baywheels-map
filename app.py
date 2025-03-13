@@ -112,7 +112,7 @@ with col1:
     # Android button
     st.markdown("""
         <a href="intent://#Intent;scheme=baywheels;package=com.motivateco.gobike;end" target="_blank">
-            <button style="padding:5px 10px; background-color:#28A745; color:white; border:none; border-radius:5px; cursor:pointer;">
+            <button style="padding:1px 10px; background-color:#28A745; color:white; border:none; border-radius:2px; cursor:pointer;">
                 <i class="material-icons">android</i>
             </button>
         </a>
@@ -122,7 +122,7 @@ with col2:
     # iPhone button
     st.markdown("""
         <a href="https://apps.apple.com/us/app/bay-wheels/id1233398899" target="_blank">
-            <button style="padding:5px 10px; background-color:#007BFF; color:white; border:none; border-radius:5px; cursor:pointer;">
+            <button style="padding:1px 10px; background-color:#007BFF; color:white; border:none; border-radius:2px; cursor:pointer;">
                 <i class="fab fa-app-store-ios"></i>
             </button>
         </a>
