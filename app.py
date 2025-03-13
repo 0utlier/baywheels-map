@@ -83,7 +83,7 @@ if button_pressed:
 else:
     # Default filter, or previous logic
     # Display map
-    classic_count = 0
+    classic_count = 100
     #folium_map = create_map(user_coords, classic_count)
     #folium_static(folium_map)
 
