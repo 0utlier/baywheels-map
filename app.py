@@ -52,9 +52,12 @@ def create_map(user_coords, classic_count):
     m = folium.Map(location=user_coords, zoom_start=15, control_scale=True)
     
     for station in stations:
+        classic_bikes_string = ""
+        if classic_count % 2 != 1:
+            classic_bikes_string = " + 1 classic"
         folium.Marker(
             location=(station["lat"], station["lon"]),
-            popup=f"{station['name']} ({station['num_ebikes']} e-bikes)",
+            popup=f"{station['name']} ({station['num_ebikes']} e-bikes){classic_bike_string}",
             icon=folium.Icon(color='blue', icon='bicycle', prefix='fa')
         ).add_to(m)
     
