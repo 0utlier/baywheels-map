@@ -57,10 +57,8 @@ def create_map(user_coords):
     
     locate_control = folium.plugins.LocateControl(auto_start=True, flyTo=True, keepCurrentZoomLevel=True)
     m.add_child(locate_control)
-    
-    return m
 
-# Add a button to trigger the update
+    # Add a button to trigger the update
 button_pressed = st.button("Show Stations with 1 Classic Bike and e-Bikes")
 
 if button_pressed:
@@ -70,6 +68,8 @@ else:
     # Default filter, or previous logic
     filtered_stations = [station for station in stations if station['num_ebikes'] > 0 and station['num_classic_bikes'] == 0]
 
+    
+    return m
 
 
 # Streamlit app setup
