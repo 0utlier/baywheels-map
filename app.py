@@ -16,7 +16,7 @@ from streamlit_folium import folium_static
 st.markdown("""
     <a href="intent://#Intent;scheme=baywheels;package=com.motivateco.gobike;end" target="_blank">
         <button style="padding:10px 20px; background-color:#007BFF; color:white; border:none; border-radius:5px; cursor:pointer;">
-            Open Bay Wheels (Droid)
+            Droid
         </button>
     </a>
 """, unsafe_allow_html=True)
@@ -25,7 +25,7 @@ st.markdown("""
 st.markdown("""
     <a href="https://apps.apple.com/us/app/bay-wheels/id1233398899" target="_blank">
         <button style="padding:10px 20px; background-color:#28A745; color:white; border:none; border-radius:5px; cursor:pointer;">
-            Open Bay Wheels (iPhone)
+            iPhone
         </button>
     </a>
 """, unsafe_allow_html=True)
