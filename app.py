@@ -43,6 +43,23 @@ def get_ebike_only_stations(user_coords):
     eligible_stations.sort(key=lambda x: x["distance"])
     return eligible_stations[:20]
 
+# Add icon libraries using markdown
+st.markdown("""
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+""", unsafe_allow_html=True)
+
+
+# iPhone button
+st.markdown("""
+    <a href="https://apps.apple.com/us/app/bay-wheels/id1233398899" target="_blank">
+        <button style="padding:10px 20px; background-color:#007BFF; color:white; border:none; border-radius:5px; cursor:pointer; display:inline-block;">
+            <i class="fab fa-app-store-ios"></i>
+        </button>
+    </a>
+""", unsafe_allow_html=True)
+
 def create_map(user_coords):
     """Generate a Folium map with e-bike-only station markers."""
     stations = get_ebike_only_stations(user_coords)
@@ -99,22 +116,7 @@ folium_static(folium_map)
 
 # ================BUTTONS for BW Mobile App==============================
 
-# Add icon libraries using markdown
-st.markdown("""
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-""", unsafe_allow_html=True)
 
-
-# iPhone button
-st.markdown("""
-    <a href="https://apps.apple.com/us/app/bay-wheels/id1233398899" target="_blank">
-        <button style="padding:10px 20px; background-color:#007BFF; color:white; border:none; border-radius:5px; cursor:pointer; display:inline-block;">
-            <i class="fab fa-app-store-ios"></i>
-        </button>
-    </a>
-""", unsafe_allow_html=True)
 
 # Android button
 st.markdown("""
