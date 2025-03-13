@@ -65,9 +65,13 @@ def create_map(user_coords):
 st.title("E-Bike Only Map")
 #st.write("Showing stations with only e-bikes available.")
 
+
+
     # Add a button to trigger the update
 button_pressed = st.button("Show Stations with 1 Classic Bike and e-Bikes")
 
+# Default coordinates (San Francisco)
+user_coords = (37.7749, -122.4194)
 if button_pressed:
     # Filter the stations based on the updated condition
     # Display map
@@ -75,7 +79,6 @@ if button_pressed:
     folium_static(folium_map)
 
     #filtered_stations = [station for station in stations if station['num_ebikes'] > 0 and station['num_classic_bikes'] == 1]
-
 else:
     # Default filter, or previous logic
     # Display map
@@ -83,6 +86,8 @@ else:
     folium_static(folium_map)
 
     #filtered_stations = [station for station in stations if station['num_ebikes'] > 0 and station['num_classic_bikes'] == 0]
+
+
 
 # JavaScript for dynamic map resizing
 st.markdown(
