@@ -40,6 +40,7 @@ def get_ebike_only_stations(user_coords, classic_count):
                 if "bikes" in status_dict[station_id]:
                     for bike in status_dict[station_id]["bikes"]:
                         bike_id = bike.get("bike_id")
+                        count_black = bike.get("bike_id")
 
                 distance = geodesic(user_coords, (station["lat"], station["lon"])).miles
                 eligible_stations.append({
@@ -48,7 +49,7 @@ def get_ebike_only_stations(user_coords, classic_count):
                     "lon": station["lon"],
                     "num_ebikes": num_ebikes,
                     "distance": distance,
-                    "count_black": bike_id
+                    "count_black": count_black
                 })
     
     eligible_stations.sort(key=lambda x: x["distance"])
