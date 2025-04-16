@@ -48,8 +48,8 @@ def get_ebike_only_stations(user_coords, classic_count):
                     "lat": station["lat"],
                     "lon": station["lon"],
                     "num_ebikes": num_ebikes,
-                    "distance": distance,
-                    "count_black": count_black
+                    "distance": distance#,
+                    # "count_black": count_black
                 })
     
     eligible_stations.sort(key=lambda x: x["distance"])
@@ -66,7 +66,7 @@ def create_map(user_coords, classic_count):
             classic_bikes_string = " + 1 classic"
         folium.Marker(
             location=(station["lat"], station["lon"]),
-            popup=folium.Popup(f"{station['name']}<br>({station['num_ebikes']} e-bikes{classic_bikes_string})<br>{station['count_black']} black bikes", max_width=300),
+            popup=folium.Popup(f"{station['name']}<br>({station['num_ebikes']} e-bikes{classic_bikes_string})<br> black bikes", max_width=300),
             icon=folium.Icon(color='blue', icon='bicycle', prefix='fa')
         ).add_to(m)
     
