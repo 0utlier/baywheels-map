@@ -19,46 +19,39 @@ def fetch_data(url):
     return response.json()
 
 def get_ebike_only_stations(user_coords, classic_count):
-    """Fetch and filter stations that only have e-bikes available and exactly `classic_count` classic bikes."""
+    """Fetch and filter stations that only have e-bikes available."""
     station_info = fetch_data(STATION_INFO_URL)["data"]["stations"]
     station_status = fetch_data(STATION_STATUS_URL)["data"]["stations"]
-    free_bikes = fetch_data(FREE_BIKE_STATUS_URL)["data"]["bikes"]
-
     status_dict = {s["station_id"]: s for s in station_status}
+
+    classic_count = CLASSIC_BIKE_COUNT % 2
     
     eligible_stations = []
-    
     for station in station_info:
         station_id = station["station_id"]
-        if station_id not in status_dict:
-            continue
+        if station_id in status_dict:
+            num_ebikes = status_dict[station_id]["num_ebikes_available"]
+            num_classic_bikes = status_dict[station_id]["num_bikes_available"] - num_ebikes
+            
+            if num_ebikes > 0 and num_classic_bikes == classic_count:
+                  # Check for bike IDs if available
+              # if "bikes" in status_dict[station_id]:
+                  # bike_ids = []
+                    count_black = 0
+                    for bike in status_dict[station_id]["bikes"]:
+                        # bike_id = bike.get("name")
+                        count_black = bike["name"]
 
-        status = status_dict[station_id]
-        num_ebikes = status["num_ebikes_available"]
-        num_classic = status["num_bikes_available"] - num_ebikes
-
-        if num_ebikes > 0 and num_classic == classic_count:
-            # Count black style bikes (name length == 7) near this station
-            count_black = 0
-            station_coords = (station["lat"], station["lon"])
-            for bike in free_bikes:
-                if "name" in bike and len(bike["name"]) == 7:
-                    bike_coords = (bike["lat"], bike["lon"])
-                    # Consider it docked here if within ~10 meters
-                    if geodesic(station_coords, bike_coords).meters < 10:
-                        count_black += 1
-
-            distance = geodesic(user_coords, station_coords).miles
-
-            eligible_stations.append({
-                "name": station["name"],
-                "lat": station["lat"],
-                "lon": station["lon"],
-                "num_ebikes": num_ebikes,
-                "count_black": count_black,
-                "distance": distance
-            })
-
+                distance = geodesic(user_coords, (station["lat"], station["lon"])).miles
+                eligible_stations.append({
+                    "name": station["name"],
+                    "lat": station["lat"],
+                    "lon": station["lon"],
+                    "num_ebikes": num_ebikes,
+                    "distance": distance#,
+                    "count_black": count_black
+                })
+    
     eligible_stations.sort(key=lambda x: x["distance"])
     return eligible_stations
 
