@@ -37,21 +37,20 @@ def get_ebike_only_stations(user_coords, classic_count):
                   # Check for bike IDs if available
               # if "bikes" in status_dict[station_id]:
                   # bike_ids = []
-                    count_black = 0
-                    for bike in status_dict[station_id]["bikes"]:
-                        # bike_id = bike.get("name")
-                        count_black = bike["name"]
+                    # count_black = 0
+                    # for bike in status_dict[station_id]["bikes"]:
+                    #     bike_id = bike.get("bike_id")
+                    #     count_black = bike.get("bike_id")
 
-                
-            distance = geodesic(user_coords, (station["lat"], station["lon"])).miles
-            eligible_stations.append({
-                "name": station["name"],
-                "lat": station["lat"],
-                "lon": station["lon"],
-                "num_ebikes": num_ebikes,
-                "distance": distance,
-                "count_black": count_black
-            })
+                distance = geodesic(user_coords, (station["lat"], station["lon"])).miles
+                eligible_stations.append({
+                    "name": station["name"],
+                    "lat": station["lat"],
+                    "lon": station["lon"],
+                    "num_ebikes": num_ebikes,
+                    "distance": distance#,
+                    # "count_black": count_black
+                })
     
     eligible_stations.sort(key=lambda x: x["distance"])
     return eligible_stations
@@ -67,7 +66,7 @@ def create_map(user_coords, classic_count):
             classic_bikes_string = " + 1 classic"
         folium.Marker(
             location=(station["lat"], station["lon"]),
-            popup=folium.Popup(f"{station['name']}<br>({station['num_ebikes']} e-bikes{classic_bikes_string})<br>{station['count_black']} black bikes", max_width=300),
+            popup=folium.Popup(f"{station['name']}<br>({station['num_ebikes']} e-bikes{classic_bikes_string})<br> black bikes", max_width=300),
             icon=folium.Icon(color='blue', icon='bicycle', prefix='fa')
         ).add_to(m)
     
@@ -150,4 +149,3 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 #==============================================
-
