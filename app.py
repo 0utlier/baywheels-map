@@ -39,7 +39,7 @@ def get_ebike_only_stations(user_coords, classic_count):
                   # Check for bike IDs if available
               # if "bikes" in status_dict[station_id]:
                   # bike_ids = []
-                    count_black = 0
+                count_black = 0
                 for bike in bike_serials[:30]:
                     bike_id = bike["name"]
                     if len(bike_id) == 7:
