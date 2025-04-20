@@ -10,6 +10,7 @@ from streamlit_folium import folium_static
 # Define Bay Wheels GBFS endpoints
 STATION_INFO_URL = "https://gbfs.baywheels.com/gbfs/en/station_information.json"
 STATION_STATUS_URL = "https://gbfs.baywheels.com/gbfs/en/station_status.json"
+BIKE_SERIAL_NUMBERS = "https://gbfs.baywheels.com/gbfs/en/free_bike_status.json"
 CLASSIC_BIKE_COUNT = 0
 
 def fetch_data(url):
@@ -22,6 +23,7 @@ def get_ebike_only_stations(user_coords, classic_count):
     """Fetch and filter stations that only have e-bikes available."""
     station_info = fetch_data(STATION_INFO_URL)["data"]["stations"]
     station_status = fetch_data(STATION_STATUS_URL)["data"]["stations"]
+    bike_serials = fetch_data(BIKE_SERIAL_NUMBERS)["data"]["bikes"]
     status_dict = {s["station_id"]: s for s in station_status}
 
     classic_count = CLASSIC_BIKE_COUNT % 2
@@ -38,8 +40,8 @@ def get_ebike_only_stations(user_coords, classic_count):
               # if "bikes" in status_dict[station_id]:
                   # bike_ids = []
                     # count_black = 0
-                    # for bike in status_dict[station_id]["bikes"]:
-                    #     bike_id = bike.get("bike_id")
+                    for bike in bike_serials[:30]:
+                        bike_id = bike["name"]
                     #     count_black = bike.get("bike_id")
 
                 distance = geodesic(user_coords, (station["lat"], station["lon"])).miles
@@ -48,8 +50,8 @@ def get_ebike_only_stations(user_coords, classic_count):
                     "lat": station["lat"],
                     "lon": station["lon"],
                     "num_ebikes": num_ebikes,
-                    "distance": distance#,
-                    # "count_black": count_black
+                    "distance": distance,
+                    "count_black": bike_id
                 })
     
     eligible_stations.sort(key=lambda x: x["distance"])
