@@ -36,23 +36,13 @@ def get_ebike_only_stations(user_coords, classic_count):
             num_classic_bikes = status_dict[station_id]["num_bikes_available"] - num_ebikes
             
             if num_ebikes > 0 and num_classic_bikes == classic_count:
-                  # Check for bike IDs if available
-              # if "bikes" in status_dict[station_id]:
-                  # bike_ids = []
-                count_black = 0
-                for bike in bike_serials[:]:
-                    bike_id = bike["name"]
-                    if len(bike_id) == 7:
-                        count_black += 1
-
                 distance = geodesic(user_coords, (station["lat"], station["lon"])).miles
                 eligible_stations.append({
                     "name": station["name"],
                     "lat": station["lat"],
                     "lon": station["lon"],
                     "num_ebikes": num_ebikes,
-                    "distance": distance,
-                    "count_black": count_black
+                    "distance": distance
                 })
     
     eligible_stations.sort(key=lambda x: x["distance"])
@@ -69,7 +59,7 @@ def create_map(user_coords, classic_count):
             classic_bikes_string = " + 1 classic"
         folium.Marker(
             location=(station["lat"], station["lon"]),
-            popup=folium.Popup(f"{station['name']}<br>({station['num_ebikes']} e-bikes{classic_bikes_string})<br> {station['count_black']} black bikes", max_width=300),
+            popup=folium.Popup(f"{station['name']}<br>({station['num_ebikes']} e-bikes{classic_bikes_string}), max_width=300),
             icon=folium.Icon(color='blue', icon='bicycle', prefix='fa')
         ).add_to(m)
     
