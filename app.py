@@ -33,23 +33,23 @@ def get_ebike_only_stations(user_coords, classic_count):
             num_ebikes = status_dict[station_id]["num_ebikes_available"]
             num_classic_bikes = status_dict[station_id]["num_bikes_available"] - num_ebikes
             
-    if num_ebikes > 0 and num_classic == classic_count:
-        # Count black style bikes (name length == 7) near this station
-        count_black = 0
-        station_coords = (station["lat"], station["lon"])
-        # for bike in free_bikes:
-        #     if "name" in bike and len(bike["name"]) == 7:
-        #         count_black += 1
+            if num_ebikes > 0 and num_classic == classic_count:
+                # Count black style bikes (name length == 7) near this station
+                count_black = 0
+                station_coords = (station["lat"], station["lon"])
+                # for bike in free_bikes:
+                #     if "name" in bike and len(bike["name"]) == 7:
+                #         count_black += 1
 
-            distance = geodesic(user_coords, (station["lat"], station["lon"])).miles
-            eligible_stations.append({
-                "name": station["name"],
-                "lat": station["lat"],
-                "lon": station["lon"],
-                "num_ebikes": num_ebikes,
-                "distance": distance,
-                "count_black": count_black
-            })
+                distance = geodesic(user_coords, (station["lat"], station["lon"])).miles
+                eligible_stations.append({
+                    "name": station["name"],
+                    "lat": station["lat"],
+                    "lon": station["lon"],
+                    "num_ebikes": num_ebikes,
+                    "distance": distance,
+                    "count_black": count_black
+                })
     
     eligible_stations.sort(key=lambda x: x["distance"])
     return eligible_stations
