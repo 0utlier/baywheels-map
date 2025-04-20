@@ -49,7 +49,7 @@ def get_ebike_only_stations(user_coords, classic_count):
                 "lat": station["lat"],
                 "lon": station["lon"],
                 "num_ebikes": num_ebikes,
-                "distance": distance#,
+                "distance": distance,
                 "count_black": count_black
             })
     
