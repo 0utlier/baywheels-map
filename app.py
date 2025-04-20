@@ -39,10 +39,7 @@ def get_ebike_only_stations(user_coords, classic_count):
         station_coords = (station["lat"], station["lon"])
         for bike in free_bikes:
             if "name" in bike and len(bike["name"]) == 7:
-                bike_coords = (bike["lat"], bike["lon"])
-                # Consider it docked here if within ~10 meters
-                if geodesic(station_coords, bike_coords).meters < 10:
-                    count_black += 1
+                count_black += 1
 
             distance = geodesic(user_coords, (station["lat"], station["lon"])).miles
             eligible_stations.append({
