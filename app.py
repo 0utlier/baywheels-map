@@ -33,14 +33,16 @@ def get_ebike_only_stations(user_coords, classic_count):
             num_ebikes = status_dict[station_id]["num_ebikes_available"]
             num_classic_bikes = status_dict[station_id]["num_bikes_available"] - num_ebikes
             
-            if num_ebikes > 0 and num_classic_bikes == classic_count:
-                  # Check for bike IDs if available
-              # if "bikes" in status_dict[station_id]:
-                  # bike_ids = []
-                    count_black = 0
-                    for bike in status_dict[station_id]["bikes"]:
-                        bike_id = bike.get("name")
-                        count_black = .format(bike["name"])
+   if num_ebikes > 0 and num_classic == classic_count:
+            # Count black style bikes (name length == 7) near this station
+            count_black = 0
+            station_coords = (station["lat"], station["lon"])
+            for bike in free_bikes:
+                if "name" in bike and len(bike["name"]) == 7:
+                    bike_coords = (bike["lat"], bike["lon"])
+                    # Consider it docked here if within ~10 meters
+                    if geodesic(station_coords, bike_coords).meters < 10:
+                        count_black += 1
 
                 distance = geodesic(user_coords, (station["lat"], station["lon"])).miles
                 eligible_stations.append({
