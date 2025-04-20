@@ -33,7 +33,7 @@ def get_ebike_only_stations(user_coords, classic_count):
             num_ebikes = status_dict[station_id]["num_ebikes_available"]
             num_classic_bikes = status_dict[station_id]["num_bikes_available"] - num_ebikes
             
-   if num_ebikes > 0 and num_classic == classic_count:
+     if num_ebikes > 0 and num_classic == classic_count:
             # Count black style bikes (name length == 7) near this station
             count_black = 0
             station_coords = (station["lat"], station["lon"])
