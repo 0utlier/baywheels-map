@@ -58,6 +58,8 @@ def get_ebike_only_stations(user_coords, classic_count):
                 "count_black": count_black,
                 "distance": distance
             })
+    eligible_stations.sort(key=lambda x: x["distance"])
+    return eligible_stations
 
 def create_map(user_coords, classic_count):
     """Generate a Folium map with e-bike-only station markers."""
