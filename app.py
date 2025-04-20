@@ -23,7 +23,7 @@ def get_ebike_only_stations(user_coords, classic_count):
     """Fetch and filter stations that only have e-bikes available."""
     station_info = fetch_data(STATION_INFO_URL)["data"]["stations"]
     station_status = fetch_data(STATION_STATUS_URL)["data"]["stations"]
-    bike_serials = fetch_data(BIKE_SERIAL_NUMBERS)["data"]["bikes"]
+    # bike_serials = fetch_data(BIKE_SERIAL_NUMBERS)["data"]["bikes"] # these are for free standing non-docked bikes 04.20.25
     status_dict = {s["station_id"]: s for s in station_status}
 
     classic_count = CLASSIC_BIKE_COUNT % 2
